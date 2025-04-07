@@ -1,7 +1,12 @@
 name: 'Chromatic Deployment'
-on: push
+on:
+  issue_comment:
+    types: [created]
+
 jobs:
   chromatic-deployment:
+    # PRコメントで '/chromatic' と書かれた場合のみ実行
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/chromatic')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -13,5 +18,3 @@ jobs:
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
