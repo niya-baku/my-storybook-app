@@ -56,3 +56,11 @@ export const Closable: Story = {
     onClose: () => console.log('Alert closed'),
   },
 };
+
+export const Neutral: Story = {
+  args: {
+    type: 'neutral',
+    title: 'Neutral Alert',
+    message: 'This is a neutral alert message with general information.',
+  },
+};

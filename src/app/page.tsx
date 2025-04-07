@@ -18,7 +18,7 @@ export default function Home() {
           
           <h2 className="text-2xl font-semibold mb-2 mt-8">Alerts</h2>
           <div className="space-y-4">
-            <Alert type="info" title="Information" message="This is an informational message." />
+            <Alert type="info" title="Info" message="This is an informational message." />
             <Alert type="success" title="Success" message="Operation completed successfully!" />
             <Alert type="warning" title="Warning" message="Please proceed with caution." />
             <Alert type="error" title="Error" message="An error has occurred." />
