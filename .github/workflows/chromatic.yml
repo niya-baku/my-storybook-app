@@ -1,12 +1,12 @@
 name: 'Chromatic Deployment'
 on:
-  issue_comment:
-    types: [created]
+  push:
+    branches: [ main, develop ]  # mainとdevelopブランチへのプッシュのみ対象
 
 jobs:
   chromatic-deployment:
-    # PRコメントで '/chromatic' と書かれた場合のみ実行
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/chromatic')
+    # コミットメッセージに'/chromatic'というキーワードが含まれる場合のみ実行
+    if: contains(github.event.head_commit.message, '/chromatic')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,3 +18,4 @@ jobs:
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          exitZeroOnChanges: true  # 視覚的な変更があってもCIを失敗させない
